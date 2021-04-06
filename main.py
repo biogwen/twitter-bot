@@ -1,5 +1,6 @@
-from api import api
+from configapi import getApi
 import datetime
+import codes
 
 # limite tweets => 180 pour 15 minutes
 # limites recherches => 300 pour 3 heures
@@ -9,6 +10,9 @@ recherche = 0
 
 limite_tweets = 180
 limite_recherche = 300
+
+
+api = getApi(consumer_key, consumer_secret, access_token, access_token_secret)
 
 
 # partie recherche
@@ -21,7 +25,7 @@ def search(sujet, quantity):
     for result in result_tweets:
         print(result.text, keywords, result.user.screen_name, result.id)
 
-        #reply(result.text, keywords, result.user.screen_name, result.id)
+        reply(result.text, keywords, result.user.screen_name, result.id)
 
 
 # réponse
@@ -30,7 +34,7 @@ def reply(texte, keywords, screen_name, id_autor):
     for keyword in keywords:
         if texte.endswith(keyword):
             print('trouvé')
-            repondre('@' + screen_name + ' we are all around the globe', id_autor)
+            print('@' + screen_name + ' we are all around the globe', id_autor)
             tweets += 1
 
 def repondre(texte, id_autor):
